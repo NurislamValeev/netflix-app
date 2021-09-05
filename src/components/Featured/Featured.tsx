@@ -2,11 +2,11 @@ import React from "react"
 import "./featured.scss"
 import {InfoOutlined, PlayArrow} from "@material-ui/icons"
 
-interface IFeatured {
-    type: string
+interface IFeaturedProps {
+    type?: string
 }
 
-const Featured = ({type}: IFeatured) => {
+const Featured = ({type}: IFeaturedProps) => {
     return (
         <div className="featured">
             {type && (
