@@ -3,7 +3,19 @@ import "./list.scss"
 import {ArrowBackIosOutlined, ArrowForwardIosOutlined} from "@material-ui/icons"
 import ListItem from "../Listitem/ListItem"
 
-const List = () => {
+type ListPropsType = {
+    content: Array<string>
+    createdAt: string
+    genre: string
+    title: string
+    type: string
+    updatedAt: string
+    __v: number
+    _id: string
+}
+
+const List = ({list}: any) => {
+    console.log(list)
 
     const [slideNumber, setSlideNumber] = React.useState(0)
     const [isMoved, setIsMoved] = React.useState(false)
@@ -29,23 +41,18 @@ const List = () => {
 
     return (
         <div className="list">
-            <span className="listTitle">Continue to watch</span>
+            <span className="listTitle">{list.title}</span>
             <div className="wrapper">
                 <ArrowBackIosOutlined className="sliderArrow left"
                                       onClick={() => handleClick("left")}
                                       style={{display: !isMoved ? "none" : "block"}}
                 />
                 <div className="container" ref={listRef}>
-                    <ListItem index={0}/>
-                    <ListItem index={1}/>
-                    <ListItem index={2}/>
-                    <ListItem index={3}/>
-                    <ListItem index={4}/>
-                    <ListItem index={5}/>
-                    <ListItem index={6}/>
-                    <ListItem index={7}/>
-                    <ListItem index={8}/>
-                    <ListItem index={9}/>
+                    {
+                        list.content.map((item: any, i: any) => (
+                            <ListItem index={i} item={item} key={`${item}${i}`}/>
+                    ))
+                    }
                 </div>
                 <ArrowForwardIosOutlined className="sliderArrow right" onClick={() => handleClick("right")}/>
             </div>

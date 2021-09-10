@@ -2,14 +2,9 @@ import React from "react"
 import "./listItem.scss"
 import {Add, PlayArrow, ThumbDownOutlined, ThumbUpAltOutlined} from "@material-ui/icons"
 
-interface IListItemProps {
-    index: number
-}
-
-const ListItem = ({index}: IListItemProps) => {
+const ListItem = ({index, item}: any) => {
 
     const [isHovered, setIsHovered] = React.useState(false)
-    const trailer = "http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
 
     return (
         <div className="listItem"
@@ -18,12 +13,12 @@ const ListItem = ({index}: IListItemProps) => {
              onMouseLeave={() => setIsHovered(false)}
         >
             <img
-                src="https://assets.whatsnewonnetflix.com/external_assets/sggkh+%5B%5Blxx*9*35*41_8_muochl_mvg%5Bwmn%5Bzkr%5Be3%5B9WD3XwV5tBgBc1rb6zq1th0DgCV%5BZZZZYAEyNPYHHLRsHBJfS70vsVsLIzrQuZHL5B7FxJcsWQVdxXUIXfE2G2ujnCjALaXd629avV*jMREiITFLsO2bb49%5DbHh.jpg"
+                src={item.img}
                 alt=""
             />
             {isHovered && (
                 <>
-                    <video src={trailer} autoPlay={true} muted loop/>
+                    <video src={item.trailer} autoPlay={true} muted loop/>
                     <div className="itemInfo">
                         <div className="icons">
                             <PlayArrow className="icon"/>
@@ -32,15 +27,14 @@ const ListItem = ({index}: IListItemProps) => {
                             <ThumbDownOutlined className="icon"/>
                         </div>
                         <div className="itemInfoTop">
-                            <span>1 hour 14 mins</span>
-                            <span className="limit">+16</span>
-                            <span>2001</span>
+                            <span>{item.duration}</span>
+                            <span className="limit">+{item.limit}</span>
+                            <span>{item.year}</span>
                         </div>
                         <div className="desc">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus ea sequi sint suscipit. Corporis
-                            culpa dolor!
+                            {item.desc}
                         </div>
-                        <div className="genre">Action</div>
+                        <div className="genre">{item.genre}</div>
                     </div>
                 </>
             )}
