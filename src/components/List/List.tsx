@@ -15,9 +15,8 @@ type ListPropsType = {
 }
 
 const List = ({list}: any) => {
-    console.log(list)
-
     const [slideNumber, setSlideNumber] = React.useState(0)
+    const [clickLimit, setClickLimit] = React.useState(window.innerWidth / 230)
     const [isMoved, setIsMoved] = React.useState(false)
 
     const listRef = React.useRef<HTMLDivElement>(null)
@@ -32,7 +31,7 @@ const List = ({list}: any) => {
                 listRef.current.style.transform = `translateX(${230 + distance}px)`
             }
 
-            if (direction === 'right' && slideNumber < 5) {
+            if (direction === 'right' && slideNumber < 10 - clickLimit) {
                 setSlideNumber(slideNumber + 1)
                 listRef.current.style.transform = `translateX(${-230 + distance}px)`
             }

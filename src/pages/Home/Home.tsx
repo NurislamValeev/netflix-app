@@ -6,7 +6,7 @@ import List from "../../components/List/List"
 import axios from "axios"
 
 type HomePropsType = {
-    type?: string
+  type?: string
 }
 
 // type ListType = {
@@ -21,42 +21,42 @@ type HomePropsType = {
 // }
 
 const Home = ({type}: HomePropsType) => {
-    const [lists, setLists] = React.useState([])
-    const [genre, setGenre] = React.useState(null)
+  const [lists, setLists] = React.useState([])
+  const [genre, setGenre] = React.useState("")
 
-    React.useEffect(() => {
-        const getRandomLists = async () => {
-            try {
-                const res = await axios.get(
-                    `lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`,
-                    {
-                        headers: {
-                            token:
-                                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzY2ZGY0ZjRlYThjZWQzNGMxZTQyZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzMTMwMTU0OSwiZXhwIjoxNjMxNzMzNTQ5fQ.skta44BT-pjrmgzcOl1M8fOMPUSMAG2QikwpFs62wjo"
-                        }
-                    }
-                )
-
-                setLists(res.data)
-            } catch (err) {
-                console.log(err)
+  React.useEffect(() => {
+    const getRandomLists = async () => {
+      try {
+        const res = await axios.get(
+          `lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`,
+          {
+            headers: {
+              token:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzY2ZGY0ZjRlYThjZWQzNGMxZTQyZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzMTg3NTg5NSwiZXhwIjoxNjMyMzA3ODk1fQ.7nfzInMHlZ19wIwv6YfwIlxyb9QHeXfo5p5xPTMX1YM"
             }
-        }
-        getRandomLists()
-    }, [type, genre])
+          }
+        )
 
-    return (
-        <div className="home">
-            <Navbar/>
-            <Featured type={type}/>
+        setLists(res.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getRandomLists()
+  }, [genre, type])
 
-            {
-                lists.map((list: any) => (
-                <List list={list} key={list._id}/>
-            ))
-            }
-        </div>
-    )
+  return (
+    <div className="home">
+      <Navbar/>
+      <Featured type={type} setGenre={setGenre}/>
+
+      {
+        lists.map((list: any) => (
+          <List list={list} key={list._id}/>
+        ))
+      }
+    </div>
+  )
 }
 
 export default Home

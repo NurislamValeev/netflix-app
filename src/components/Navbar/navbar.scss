@@ -1,3 +1,5 @@
+@import "../../app.scss";
+
 .navbar {
   width: 100%;
   color: white;
@@ -19,6 +21,15 @@
     justify-content: space-between;
     height: 70px;
 
+    @include tablet {
+      padding: 0px 40px 0px 35px;
+    }
+
+    @include mobile {
+      padding: 0px 30px 0px 20px;
+
+    }
+
     .left {
       display: flex;
       align-items: center;
@@ -26,11 +37,29 @@
       img {
         height: 25px;
         margin-right: 40px;
+
+        @include mobile {
+          display: none;
+        }
       }
 
       span {
         margin-right: 20px;
         cursor: pointer;
+
+        @include tablet {
+          display: none;
+        }
+
+        @include mobile {
+          margin-right: 15px;
+        }
+
+        &.navbarMainLinks {
+          @include tablet {
+            display: block;
+          }
+        }
       }
     }
 
