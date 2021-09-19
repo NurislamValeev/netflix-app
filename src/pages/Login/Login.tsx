@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, {useContext} from "react"
 import {login} from "../../authContext/apiCalls"
 import "./login.scss"
 import {AuthContext} from "../../authContext/AuthContext"

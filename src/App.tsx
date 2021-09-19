@@ -8,7 +8,7 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import { useContext } from "react"
 import { AuthContext } from "./authContext/AuthContext"
 
-const App = () => {
+const App: React.FC = () => {
     const {user} = useContext(AuthContext)
 
     return (

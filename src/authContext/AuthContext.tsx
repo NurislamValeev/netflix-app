@@ -1,7 +1,8 @@
 import AuthReducer from "./AuthReducer"
 import {createContext, Dispatch, ReactNode, useEffect, useReducer} from "react"
+import {ActionType} from "./AuthActions"
 
-const INITIAL_STATE = {
+const INITIAL_STATE: InitialStateType = {
   user: JSON.parse(localStorage.getItem("user") as string) || null,
   isFetching: false,
   error: false,
@@ -9,9 +10,9 @@ const INITIAL_STATE = {
 
 export type InitialStateType = {
   user: string | null
-  isFetching: boolean,
-  error: boolean,
-  dispatch?: Dispatch<any>
+  isFetching: boolean
+  error: boolean
+  dispatch?: Dispatch<ActionType>
 }
 
 export const AuthContext = createContext<InitialStateType>(INITIAL_STATE)

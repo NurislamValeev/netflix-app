@@ -9,18 +9,11 @@ type HomePropsType = {
   type?: string
 }
 
-// type ListType = {
-//     content: Array<string>
-//     createdAt: string
-//     genre: string
-//     title: string
-//     type: string
-//     updatedAt: string
-//     __v: number
-//     _id: string
-// }
+type ListItemType = {
+  _id: string
+}
 
-const Home = ({type}: HomePropsType) => {
+const Home: React.FC<HomePropsType> = ({type}) => {
   const [lists, setLists] = React.useState([])
   const [genre, setGenre] = React.useState("")
 
@@ -36,7 +29,6 @@ const Home = ({type}: HomePropsType) => {
             }
           }
         )
-
         setLists(res.data)
       } catch (err) {
         console.log(err)
@@ -51,8 +43,8 @@ const Home = ({type}: HomePropsType) => {
       <Featured type={type} setGenre={setGenre}/>
 
       {
-        lists.map((list: any) => (
-          <List list={list} key={list._id}/>
+        lists.map((listItem: ListItemType) => (
+          <List list={listItem} key={listItem._id}/>
         ))
       }
     </div>

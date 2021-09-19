@@ -1,15 +1,15 @@
-import React, {Dispatch, SetStateAction} from "react"
+import React, {ChangeEvent, Dispatch, SetStateAction} from "react"
 import axios from "axios"
 import "./featured.scss"
-import {InfoOutlined, PlayArrow} from "@material-ui/icons"
+import {PlayArrow} from "@material-ui/icons"
 import {Link} from "react-router-dom"
 
-interface IFeaturedProps {
+type FeaturedPropsType = {
   type?: string
   setGenre: Dispatch<SetStateAction<string>>
 }
 
-const Featured = ({type, setGenre}: IFeaturedProps) => {
+const Featured: React.FC<FeaturedPropsType> = ({type, setGenre}) => {
   const [content, setContent] = React.useState({
     img: "",
     imgTitle: "",
@@ -33,7 +33,6 @@ const Featured = ({type, setGenre}: IFeaturedProps) => {
                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzY2ZGY0ZjRlYThjZWQzNGMxZTQyZSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzMTg3NTg5NSwiZXhwIjoxNjMyMzA3ODk1fQ.7nfzInMHlZ19wIwv6YfwIlxyb9QHeXfo5p5xPTMX1YM"
             }
           })
-        console.log(res.data[0])
         setContent(res.data[0])
       } catch (err) {
         console.log(err)
@@ -42,8 +41,6 @@ const Featured = ({type, setGenre}: IFeaturedProps) => {
     getRandomContent()
   }, [type])
 
-  // @ts-ignore
-  // @ts-ignore
   return (
     <div className="featured">
       {type && (
@@ -52,7 +49,7 @@ const Featured = ({type, setGenre}: IFeaturedProps) => {
           <select
             name="genre"
             id="genre"
-            onChange={(e) => setGenre(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => setGenre(e.target.value)}
           >
             <option value="">Genre</option>
             <option value="adventure">Adventure</option>
@@ -81,19 +78,12 @@ const Featured = ({type, setGenre}: IFeaturedProps) => {
         />
         <span className="desc">{content.desc}</span>
         <div className="buttons">
-
-          {/*@ts-ignore*/}
-          <Link to={{pathname: "/watch", movie: content}} className="play">
+          <Link to={{pathname: "/watch", state: content} as Object} className="play">
             <button className="playButton">
               <PlayArrow/>
               Play
             </button>
           </Link>
-
-          <button className="more">
-            <InfoOutlined/>
-            <span>Info</span>
-          </button>
         </div>
       </div>
     </div>

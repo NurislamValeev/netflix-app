@@ -1,12 +1,13 @@
-import {InitialStateType} from "./AuthContext";
+import {InitialStateType} from "./AuthContext"
+import {ActionType} from "./AuthActions"
 
-const AuthReducer = (state: InitialStateType, action: any): InitialStateType => {
+const AuthReducer = (state: InitialStateType, action: ActionType): InitialStateType => {
   switch (action.type) {
     case "LOGIN_START":
       return {
         user: null,
         isFetching: true,
-        error: false
+        error: false,
       }
 
     case "LOGIN_SUCCESS":

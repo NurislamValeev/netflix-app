@@ -4,7 +4,12 @@ import axios from "axios"
 import {Add, PlayArrow, ThumbDownOutlined, ThumbUpAltOutlined} from "@material-ui/icons"
 import "./listItem.scss"
 
-const ListItem = ({index, item}: any) => {
+type ListItemPropsType = {
+    index: number
+    item: string
+}
+
+const ListItem: React.FC<ListItemPropsType> = ({index, item}) => {
 
     const [isHovered, setIsHovered] = React.useState(false)
     const [movie, setMovie] = React.useState({
@@ -36,8 +41,7 @@ const ListItem = ({index, item}: any) => {
     }, [item])
 
     return (
-      // @ts-ignore
-      <Link to={{pathname: "/watch", movie: movie}}>
+      <Link to={{pathname: "/watch", state: movie}}>
             <div className="listItem"
                  style={{left: `${isHovered && index * 225 - 50 + index * 2.5}px`}}
                  onMouseEnter={() => setIsHovered(true)}
