@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
     const {dispatch} = useContext(AuthContext)
 
     window.onscroll = () => {
-        setIsScrolled(window.pageYOffset === 0 ? false : true)
+        setIsScrolled(window.pageYOffset !== 0)
         return () => window.onscroll = null
     }
 
