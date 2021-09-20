@@ -5,6 +5,14 @@ import {Dispatch} from "react"
 export type UserType = {
   email: string
   password: string
+  accessToken?: string
+  createdAt?: string
+  updatedAt?: string
+  isAdmin?: boolean
+  profilePic?: string
+  username?: string
+  __v?: number
+  _id?: string
 }
 
 export const login = async (user: UserType, dispatch: Dispatch<ActionType> | undefined) => {
@@ -13,9 +21,10 @@ export const login = async (user: UserType, dispatch: Dispatch<ActionType> | und
   }
 
   try {
-    const res = await axios.post("/auth/login", user)
+    const res = await axios.post<UserType>("/auth/login", user)
     if (dispatch) {
       dispatch(loginSuccess(res.data))
+      console.log(res.data)
     }
   } catch (err) {
     if (dispatch) {

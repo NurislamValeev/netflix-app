@@ -5,19 +5,14 @@ import {Link, useHistory} from "react-router-dom"
 
 const Register = () => {
 
-  const [email, setEmail] = React.useState<string | null>(null)
-  const [password, setPassword] = React.useState<string | null>(null)
-  const [username, setUsername] = React.useState<string | null>(null)
+  const [email, setEmail] = React.useState<string>("")
+  const [password, setPassword] = React.useState<string>("")
+  const [username, setUsername] = React.useState<string>("")
   const history = useHistory()
 
-  const emailRef = React.useRef<HTMLInputElement | null>(null)
-  const usernameRef = React.useRef<HTMLInputElement | null>(null)
-  const passwordRef = React.useRef<HTMLInputElement | null>(null)
-
-  // React.useEffect(() => {
-  //     emailRef.current?.focus()
-  //     // passwordRef.current?.focus()
-  // }, [])
+  const emailRef = React.useRef<HTMLInputElement>(null)
+  const usernameRef = React.useRef<HTMLInputElement>(null)
+  const passwordRef = React.useRef<HTMLInputElement>(null)
 
   const handleStart = () => {
     setEmail(emailRef.current!.value)

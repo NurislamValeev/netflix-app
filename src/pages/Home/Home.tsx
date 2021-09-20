@@ -11,16 +11,23 @@ type HomePropsType = {
 
 type ListItemType = {
   _id: string
+  __v: number
+  updatedAt: string
+  createdAt: string
+  type: string
+  title: string
+  genre: string
+  content: Array<string>
 }
 
 const Home: React.FC<HomePropsType> = ({type}) => {
-  const [lists, setLists] = React.useState([])
+  const [lists, setLists] = React.useState<ListItemType[]>([])
   const [genre, setGenre] = React.useState("")
 
   React.useEffect(() => {
     const getRandomLists = async () => {
       try {
-        const res = await axios.get(
+        const res = await axios.get<ListItemType[]>(
           `lists${type ? "?type=" + type : ""}${genre ? "&genre=" + genre : ""}`,
           {
             headers: {

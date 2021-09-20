@@ -9,24 +9,47 @@ type FeaturedPropsType = {
   setGenre: Dispatch<SetStateAction<string>>
 }
 
+type ContentType = {
+  createdAt: string
+  updatedAt: string
+  img: string
+  imgTitle: string
+  imgSm: string
+  desc: string
+  video: string
+  trailer: string
+  limit: number
+  isSeries: boolean
+  year: string
+  genre: string
+  title: string
+  __v: number
+  _id: string
+}
+
 const Featured: React.FC<FeaturedPropsType> = ({type, setGenre}) => {
-  const [content, setContent] = React.useState({
-    img: "",
-    imgTitle: "",
-    imgSm: "",
+  const [content, setContent] = React.useState<ContentType>({
+    __v: 0,
+    _id: "",
+    createdAt: "",
     desc: "",
-    video: "",
+    genre: "",
+    img: "",
+    imgSm: "",
+    imgTitle: "",
+    isSeries: false,
+    limit: 0,
+    title: "",
     trailer: "",
-    duration: "",
-    limit: null,
-    year: "",
-    genre: ""
+    updatedAt: "",
+    video: "",
+    year: ""
   })
 
   React.useEffect(() => {
     const getRandomContent = async () => {
       try {
-        const res = await axios.get(`/movies/random?type=${type}`,
+        const res = await axios.get<ContentType[]>(`/movies/random?type=${type}`,
           {
             headers: {
               token:
